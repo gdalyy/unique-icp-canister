@@ -1,0 +1,13 @@
+{
+  "canisters": {
+    "shopping_cart": {
+      "type": "custom",
+      "main": "src/index.ts",
+      "candid": "src/index.did",
+      "build": "npx azle shopping_cart",
+      "ts": "src/index.ts",
+      "wasm": ".azle/shopping_cart/shopping_cart.wasm",
+      "gzip": true
+    }
+  }
+}

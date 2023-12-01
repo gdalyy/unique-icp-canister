@@ -1,0 +1,9 @@
+service: () -> {
+    addCartItem: (record {name:text; quantity:nat16; price:float64}, principal) -> (variant {Ok:record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text});
+    createCart: () -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text});
+    deleteCart: (principal) -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text});
+    getCart: (principal) -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text}) query;
+    getCartItems: (principal) -> (variant {Ok:vec record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text}) query;
+    getCarts: () -> (variant {Ok:vec record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text}) query;
+    updateCartItem: (record {name:text; quantity:nat16; price:float64}, principal) -> (variant {Ok:record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text});
+}
