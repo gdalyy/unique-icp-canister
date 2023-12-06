@@ -1,9 +1,35 @@
-service: () -> {
-    addCartItem: (record {name:text; quantity:nat16; price:float64}, principal) -> (variant {Ok:record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text});
-    createCart: () -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text});
-    deleteCart: (principal) -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text});
-    getCart: (principal) -> (variant {Ok:record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text}) query;
-    getCartItems: (principal) -> (variant {Ok:vec record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text}) query;
-    getCarts: () -> (variant {Ok:vec record {id:principal; createdAt:nat64; cartItems:vec principal; updatedAt:opt nat64; totalPrice:float64}; Err:text}) query;
-    updateCartItem: (record {name:text; quantity:nat16; price:float64}, principal) -> (variant {Ok:record {id:principal; name:text; createdAt:nat64; updatedAt:opt nat64; quantity:nat16; cartId:principal; price:float64}; Err:text});
+type Cart = record {
+  id : text;
+  createdAt : nat64;
+  cartItems : vec text;
+  updatedAt : opt nat64;
+  totalPrice : float64;
+};
+type CartItem = record {
+  id : text;
+  name : text;
+  createdAt : nat64;
+  updatedAt : opt nat64;
+  quantity : nat16;
+  cartId : text;
+  price : float64;
+};
+type CartItemPayload = record {
+  name : text;
+  quantity : nat16;
+  price : float64;
+};
+type CartPayload = record { cartItems : vec text; totalPrice : float64 };
+type _AzleResult = variant { Ok : CartItem; Err : text };
+type _AzleResult_1 = variant { Ok : Cart; Err : text };
+type _AzleResult_2 = variant { Ok : vec CartItem; Err : text };
+type _AzleResult_3 = variant { Ok : vec Cart; Err : text };
+service : () -> {
+  addCartItem : (CartItemPayload, text) -> (_AzleResult);
+  createCart : (CartPayload) -> (_AzleResult_1);
+  deleteCart : (text) -> (_AzleResult_1);
+  getCart : (text) -> (_AzleResult_1) query;
+  getCartItems : (text) -> (_AzleResult_2) query;
+  getCarts : () -> (_AzleResult_3) query;
+  updateCartItem : (CartItemPayload, text) -> (_AzleResult);
 }
