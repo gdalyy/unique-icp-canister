@@ -53,7 +53,7 @@ function isInvalidString(str: string): boolean {
   return str.trim().length == 0
 }
 
-function validateCarItemPayload(payload: CartItemPayload): Vec<string>{
+function validateCartItemPayload(payload: CartItemPayload): Vec<string>{
   const errors: Vec<string> = [];
   if (isInvalidString(payload.name)){
       errors.push(`Name must not be empty. Current name='${payload.name}'.`)
@@ -156,7 +156,7 @@ function isValidUuid(id: string): boolean {
       return Result.Err(`id='${cartId}' is not in the valid uuid format.`)
     }
     // Validate payload properties
-    let payloadErrors = validateCarItemPayload(payload);
+    let payloadErrors = validateCartItemPayload(payload);
     if (payloadErrors.length) {
       return Result.Err<CartItem, string>(`Invalid payload. Errors=[${payloadErrors}]`);
     }
@@ -197,7 +197,7 @@ function isValidUuid(id: string): boolean {
       return Result.Err(`id='${cartItemId}' is not in the valid uuid format.`)
     }
     // Validate payload properties
-    let payloadErrors = validateCarItemPayload(payload);
+    let payloadErrors = validateCartItemPayload(payload);
     if (payloadErrors.length) {
       return Result.Err(`Invalid payload. Errors=[${payloadErrors}]`);
     }
