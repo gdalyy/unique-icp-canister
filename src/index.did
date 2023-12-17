@@ -1,5 +1,6 @@
 type Cart = record {
   id : text;
+  "principal" : principal;
   createdAt : nat64;
   cartItems : vec text;
   updatedAt : opt nat64;
@@ -19,14 +20,13 @@ type CartItemPayload = record {
   quantity : nat16;
   price : float64;
 };
-type CartPayload = record { cartItems : vec text; totalPrice : float64 };
 type _AzleResult = variant { Ok : CartItem; Err : text };
 type _AzleResult_1 = variant { Ok : Cart; Err : text };
 type _AzleResult_2 = variant { Ok : vec CartItem; Err : text };
 type _AzleResult_3 = variant { Ok : vec Cart; Err : text };
 service : () -> {
   addCartItem : (CartItemPayload, text) -> (_AzleResult);
-  createCart : (CartPayload) -> (_AzleResult_1);
+  createCart : () -> (_AzleResult_1);
   deleteCart : (text) -> (_AzleResult_1);
   getCart : (text) -> (_AzleResult_1) query;
   getCartItems : (text) -> (_AzleResult_2) query;
